@@ -96,9 +96,210 @@ async def usage(ctx):
 async def on_ready():
     print(f"Logged in as {bot.user}")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Made by NyX AI"))
+    
 
 @bot.event
 async def on_member_remove(member):
     api_keys.delete_one({"discord_id": str(member.id)})
+
+@bot.slash_command(name="example-python", description="Shows an example of Python code for OpenAI")
+async def example_python(ctx):
+    try:
+        code = """
+# Non Streaming 
+```py
+from openai import OpenAI
+
+client = OpenAI(api_key="/generate-key", base_url="https://nyx-bqfx.onrender.com/openai")
+
+completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Hello!"},
+    ],
+)
+
+print(completion.choices[0].message.content)```
+"""
+        await ctx.respond(code)
+    except Exception as e:
+        await ctx.respond(f'Error fetching code: {str(e)}')
+
+
+@bot.slash_command(name="example-curl", description="Shows an example of cURL code for OpenAI")
+async def example_pythonnnnn(ctx):
+    try:
+        code = """
+# cURL 
+```c
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer YOUR_API_KEY" \
+-d '{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {"role": "user", "content": "Hey! How Are you?"}
+  ]
+}' https://nyx-bqfx.onrender.com/openai/chat/completions
+```
+"""
+        await ctx.respond(code)
+    except Exception as e:
+        await ctx.respond(f'Error fetching code: {str(e)}')
+
+@bot.slash_command(name="example-python-stream", description="Shows an example of Python code for OpenAI Streaming")
+async def example_pythonnnn(ctx):
+    try:
+        code = """
+# Streaming       
+```py
+from openai import OpenAI
+
+client = OpenAI(api_key="/generate-key", base_url="https://nyx-bqfx.onrender.com/openai")
+
+stream = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[{"role": "user", "content": "Hey! How Are you?"}],
+  stream=True,
+)
+for part in stream:
+  print(part.choices[0].delta.content or "")```
+"""
+        await ctx.respond(code)
+    except Exception as e:
+        await ctx.respond(f'Error fetching code: {str(e)}')
+
+@bot.slash_command(name="example-javascript", description="Shows an example of JavaScript code for OpenAI")
+async def example_javascript(ctx):
+    try:
+        code = """
+# JavaScript 
+```js
+const axios = require('axios');
+
+const apiKey = '/generate-key';
+const apiUrl = 'https://nyx-bqfx.onrender.com//openai';
+const model = 'gpt-3.5-turbo';
+
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${apiKey}`
+};
+
+const data = {
+  model: model,
+  messages: [
+    { role: 'user', content: 'Hey! How Are you?' }
+  ]
+};
+
+axios.post(`${apiUrl}/chat/completions`, data, { headers: headers })
+  .then(response => {
+    const responseDataString = JSON.stringify(response.data, null, 2);
+    console.log(responseDataString);
+  })
+  .catch(error => {
+    console.error(`Error: ${error.response.status}, ${error.response.data}`);
+  });
+```
+"""
+        await ctx.respond(code)
+    except Exception as e:
+        await ctx.respond(f'Error fetching code: {str(e)}')
+
+@bot.slash_command(name="api-information", description="Returns the NyX AI's Information")
+async def website(ctx):
+    nyx_website = "https://nyx-ai.glitch.me"
+    base_url = "https://nyx-bqfx.onrender.com/openai"
+    discord_invite = "https://discord.gg/rdC7xYvrxu"
+    completion_url = "https://nyx-bqfx.onrender.com/openai/chat/completion"
+    roleplay_url = "https://nyx-chat.samirawm7.repl.co"
+    donation_url = "https://www.buymeacoffee.com/samir.xr"
+    github_url = "https://github.com/SamirXR"
+    models_url = "https://nyx-bqfx.onrender.com/openai/models"
+
+    embed = discord.Embed(title="NyX AI Information", color=discord.Color.default())
+
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1162893971983437976/1173603370498523147/okkkk.png")
+    embed.add_field(name="NyX Website", value=nyx_website, inline=False)
+    embed.add_field(name="Roleplay URL", value=roleplay_url, inline=False)
+    embed.add_field(name="Base URL", value=base_url, inline=False)
+    embed.add_field(name="Discord Invite", value=discord_invite, inline=False)
+    embed.add_field(name="Completion URL", value=completion_url, inline=False)
+    embed.add_field(name="Donation Link", value=donation_url, inline=False)
+    embed.add_field(name="GitHub", value=github_url, inline=False)
+    embed.add_field(name="Models", value=models_url, inline=False)
+    embed.set_footer(text=f"Requested By {ctx.author.name}")  # Adjust size as needed
+    await ctx.respond(embed=embed)
+
+
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(913760148302987304)  # replace with your channel ID
+    if channel:
+        await channel.send(f'Welcome to NyX AI, {member.mention}!')
+
+@bot.event
+async def on_member_leave(member):
+    channel = bot.get_channel(913760148302987304)  # replace with your channel ID
+    if channel:
+        await channel.send(f'{member.name} left the server : |')
+
+
+
+
+@bot.slash_command(name="usage-information", description="Shows the Information about Daily usage")
+async def example_pythonnnnnnnnnnnnn(ctx):
+    try:
+        code = """
+# Daily Usage
+
+You get 600 Credits/Day
+
+Each Request costs 3 (600/3 = 200)
+
+There is No GPT-4 in Api, but Don't worry, There's @NyX DM This Bot you get 50/Day Requests after that it fall backs to Mistral-7b (200 Requests/Day)
+
+Therefore Total Requests Per day 200 (API ) +200+50 (BOT) = 450 & Unlimited Requests with Roleplay Site.
+"""
+        await ctx.respond(code)
+    except Exception as e:
+        await ctx.respond(f'Error fetching code: {str(e)}')
+
+@bot.slash_command(name="model-information", description="Shows the Information about NyX Models")
+async def example_pythonnnnnnnnnnnnnnn(ctx):
+    try:
+        code = """
+# NyX AI Models
+
+## Chat Models (5/Request)
+llama-2-7b
+llama-2-13b
+llama-2-70b-chat
+codellama34-b
+claude-instant-1.2
+airoboros-70b
+mistral-7b
+
+## GPT Models  (5/Request)
+gpt-3.5-turbo-1106
+gpt-3.5-turbo
+gpt-3.5-turbo-0613
+gpt-3.5-turbo-0301
+
+
+## Premium Models (50/Request)
+claude-2.0
+claude-2.1
+gpt-4
+google-gemini-pro
+
+"""
+        await ctx.respond(code)
+    except Exception as e:
+        await ctx.respond(f'Error fetching code: {str(e)}')
+
+
+bot.run(os.getenv('DISCORD_BOT_TOKEN'))
+
 
 bot.run("MTE1ODE3MzUyMjUyMzM0NDkyNw.G4msDr.o4Oh_8HeHc7Hn_X3NN6JB3efYEqAaxypFPRusk")
