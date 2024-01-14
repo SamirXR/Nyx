@@ -6,6 +6,8 @@ from fastapi.security import APIKeyHeader
 from pydantic import BaseModel
 from typing import List
 import httpx
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 from datetime import datetime, timedelta
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
@@ -27,8 +29,18 @@ app.add_middleware(
 )
 api_key_header = APIKeyHeader(name="Authorization", scheme_name="Bearer")
 
-client = MongoClient('mongodb+srv://snipershot281:bIwDZRrqQryzquUh@nyx.hnjano2.mongodb.net/?retryWrites=true&w=majority')
-db = client['api_keys']
+uri = "mongodb+srv://snipershot281:bIwDZRrqQryzquUh@nyx.hnjano2.mongodb.net/?retryWrites=true&w=majority"
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+
+db = client['nyx']
+api_keys = db['api_keys']
+
 
 MODEL_NAMES = {
     "llama-2-7b": "meta-llama/Llama-2-70b-chat-hf",
@@ -44,6 +56,12 @@ MANTON_MODEL_NAMES = {
     "gpt-3.5-turbo" : "gpt-3.5-turbo",
     "gpt-3.5-turbo-0613" : "gpt-3.5-turbo-0613",
     "gpt-3.5-turbo-0301" : "gpt-3.5-turbo-0301",
+    "gpt-4":"gpt-4",
+    "claude-2.1":"claude-2.1",
+    "google-gemini-pro" : "google-gemini-pro",
+    "claude-2.0" :"claude-2.0",
+    "claude-2.1" : "claude-2.1"
+    
 }
 
 def verify_nyx_api_key(thothaiapikey):
@@ -87,11 +105,45 @@ class RequestBody(BaseModel):
     temperature: float = 0.7
     stream: bool = False
 
+async def process_completions(body: RequestBody):
+  url = 'https://api.deepinfra.com/v1/openai/chat/completions'
+  del body.max_tokens
+  if body.stream:
+    async with httpx.AsyncClient() as client:
+        async with client.stream("POST", url, headers={'Content-Type': 'application/json'}, json=body.model_dump(), timeout=360) as resp:
+            async for chunk in resp.aiter_bytes():
+                yield chunk
+  else:
+    response = await httpx.AsyncClient().post(url, headers={'Content-Type': 'application/json'}, json=body.model_dump(), timeout=360)
+    yield response.content
+
+async def process_manton_completions(body: RequestBody):
+  url = 'https://free.chatgpt.org.uk/api/openai/v1/chat/completions'
+  headers = {
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'origin': 'https://gpt.manton.fun',
+      'referer': 'https://gpt.manton.fun/',
+      'x-requested-with': 'XMLHttpRequest',
+  }
+  if body.stream:
+    async with httpx.AsyncClient() as client:
+        async with client.stream("POST", url, headers=headers, json=body.model_dump(), timeout=360) as resp:
+            async for chunk in resp.aiter_bytes():
+                if chunk:
+                  yield chunk
+  else:
+    response = await httpx.AsyncClient().post(url, headers=headers, json=body.model_dump(), timeout=360)
+    yield response.content
+
 @app.get("/")
 def read_root():
     return {"Heyyy!": "Welcome to NyX AI! Join our Discord server: https://discord.com/invite/9bqRWAP74f"}
 
+@app.post("/openai/chat/completions/v1/chat/completions")
+@app.post("/openai/chat/completions/chat/completions") 
 @app.post("/openai/chat/completions")
+@app.post("/v1/chat/completions")
 async def get_completions(body: RequestBody, key: str = Depends(api_key_header)):
     if not verify_nyx_api_key(key):
         raise HTTPException(status_code=401, detail="Invalid API key or daily limit reached")
@@ -107,14 +159,18 @@ async def get_completions(body: RequestBody, key: str = Depends(api_key_header))
     if model_name:
         body.model = model_name
         if body.stream:
-            return StreamingResponse(process_completions(body), media_type="text/event-stream")
+            response = StreamingResponse(process_completions(body), media_type="text/event-stream")
+            response.headers["X-Accel-Buffering"] = "no"
+            return response
         else:
             async for chunk in process_completions(body):
                 return json.loads(chunk)
     elif manton_model_name:
         body.model = manton_model_name
         if body.stream:
-            return StreamingResponse(process_manton_completions(body), media_type="text/event-stream")
+          response = StreamingResponse(process_manton_completions(body), media_type="text/event-stream")
+          response.headers["X-Accel-Buffering"] = "no"
+          return response
         else:
             async for chunk in process_manton_completions(body):
                 return json.loads(chunk)
