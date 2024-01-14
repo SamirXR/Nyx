@@ -1,18 +1,25 @@
 import discord
 from discord.ext import commands
-from pymongo import MongoClient
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 from datetime import datetime, timedelta
-import os
 import random
 import string
 
 intents = discord.Intents.all()
 bot = discord.Bot(command_prefix="!", intents=intents)
 
-client = MongoClient('mongodb+srv://snipershot281:bIwDZRrqQryzquUh@nyx.hnjano2.mongodb.net/?retryWrites=true&w=majority')
+uri = "mongodb+srv://snipershot281:bIwDZRrqQryzquUh@nyx.hnjano2.mongodb.net/?retryWrites=true&w=majority"
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+
 db = client['nyx']
 api_keys = db['api_keys']
-
 
 def get_key_by_discord_id(discord_id):
     user_data = api_keys.find_one({"discord_id": discord_id})
