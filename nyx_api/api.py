@@ -57,7 +57,7 @@ MANTON_MODEL_NAMES = {
     "gpt-3.5-turbo-0613" : "gpt-3.5-turbo-0613",
     "gpt-3.5-turbo-0301" : "gpt-3.5-turbo-0301",
     "gpt-4":"gpt-4",
-    "claude-2.1":"claude-2.1",
+    "claude-instant-1.2":"claude-instant-1.2",
     "google-gemini-pro" : "google-gemini-pro",
     "claude-2.0" :"claude-2.0",
     "claude-2.1" : "claude-2.1"
