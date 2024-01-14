@@ -299,7 +299,5 @@ google-gemini-pro
         await ctx.respond(f'Error fetching code: {str(e)}')
 
 
-bot.run(os.getenv('DISCORD_BOT_TOKEN'))
-
 
 bot.run("MTE1ODE3MzUyMjUyMzM0NDkyNw.G4msDr.o4Oh_8HeHc7Hn_X3NN6JB3efYEqAaxypFPRusk")
