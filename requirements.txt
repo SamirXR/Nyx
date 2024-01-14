@@ -1,0 +1,6 @@
+py-cord
+fastapi 
+httpx 
+pydantic 
+pymongo
+uvicorn
