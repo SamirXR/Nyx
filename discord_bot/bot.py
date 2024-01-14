@@ -177,7 +177,7 @@ async def example_javascript(ctx):
 const axios = require('axios');
 
 const apiKey = '/generate-key';
-const apiUrl = 'https://nyx-bqfx.onrender.com//openai';
+const apiUrl = 'https://nyx-bqfx.onrender.com/openai';
 const model = 'gpt-3.5-turbo';
 
 const headers = {
@@ -255,11 +255,7 @@ async def example_pythonnnnnnnnnnnnn(ctx):
 
 You get 600 Credits/Day
 
-Each Request costs 3 (600/3 = 200)
-
-There is No GPT-4 in Api, but Don't worry, There's @NyX DM This Bot you get 50/Day Requests after that it fall backs to Mistral-7b (200 Requests/Day)
-
-Therefore Total Requests Per day 200 (API ) +200+50 (BOT) = 450 & Unlimited Requests with Roleplay Site.
+Therefore Total Requests Per day 200 (API ) + Unlimited Gemini Bot + Unlimited Roleplay Site
 """
         await ctx.respond(code)
     except Exception as e:
