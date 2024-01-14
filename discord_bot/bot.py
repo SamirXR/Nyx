@@ -101,4 +101,4 @@ async def on_ready():
 async def on_member_remove(member):
     api_keys.delete_one({"discord_id": str(member.id)})
 
-bot.run("MTE1ODE3MzUyMjUyMzM0NDkyNw.GbczJ6.3ax46tz17Kq3Xq-zO6PdacAxV6T6DSk7afTZF0")
+bot.run("MTE1ODE3MzUyMjUyMzM0NDkyNw.G4msDr.o4Oh_8HeHc7Hn_X3NN6JB3efYEqAaxypFPRusk")
