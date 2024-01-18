@@ -49,6 +49,7 @@ MODEL_NAMES = {
     "codellama34-b": "codellama/CodeLlama-34b-Instruct-hf",
     "airoboros-70b": "jondurbin/airoboros-l2-70b-gpt4-1.4.1",
     "mistral-7b": "mistralai/Mistral-7B-Instruct-v0.1",
+    "mixtral-8x7B" :"mistralai/Mixtral-8x7B-Instruct-v0.1",
 }
 
 MANTON_MODEL_NAMES = {
