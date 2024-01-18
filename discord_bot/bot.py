@@ -275,6 +275,7 @@ codellama34-b
 claude-instant-1.2
 airoboros-70b
 mistral-7b
+mixtral-8x7B
 
 ## GPT Models  (5/Request)
 gpt-3.5-turbo-1106
