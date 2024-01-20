@@ -50,6 +50,8 @@ MODEL_NAMES = {
     "airoboros-70b": "jondurbin/airoboros-l2-70b-gpt4-1.4.1",
     "mistral-7b": "mistralai/Mistral-7B-Instruct-v0.1",
     "mixtral-8x7B" :"mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "lzlv-70b":"lizpreciatior/lzlv_70b_fp16_hf",
+    "dolphin-mixtral-8x7b":"cognitivecomputations/dolphin-2.6-mixtral-8x7b",
 }
 
 MANTON_MODEL_NAMES = {
