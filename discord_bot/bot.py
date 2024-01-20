@@ -276,6 +276,8 @@ claude-instant-1.2
 airoboros-70b
 mistral-7b
 mixtral-8x7B
+dolphin-mixtral-8x7b  
+lzlv 70b
 
 ## GPT Models  (5/Request)
 gpt-3.5-turbo-1106
