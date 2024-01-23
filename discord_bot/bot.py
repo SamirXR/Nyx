@@ -280,10 +280,38 @@ dolphin-mixtral-8x7b
 lzlv 70b
 
 ## GPT Models  (5/Request)
-gpt-3.5-turbo-1106
-gpt-3.5-turbo
+text-search-babbage-doc-001
+gpt-4-0613
+gpt-4
+babbage
 gpt-3.5-turbo-0613
+text-babbage-001
+gpt-3.5-turbo
+gpt-3.5-turbo-1106
+curie-instruct-beta
 gpt-3.5-turbo-0301
+gpt-3.5-turbo-16k-0613
+text-embedding-ada-002
+davinci-similarity
+curie-similarity
+babbage-search-document
+curie-search-document
+babbage-code-search-code
+ada-code-search-text
+text-search-curie-query-001
+text-davinci-002
+ada
+text-ada-001
+ada-similarity
+code-search-ada-code-001
+text-similarity-ada-001
+text-davinci-edit-001
+code-davinci-edit-001
+text-search-curie-doc-001
+text-curie-001
+curie
+davinci
+gpt-4-0314
 
 
 ## Premium Models (50/Request)
