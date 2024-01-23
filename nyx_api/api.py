@@ -193,6 +193,10 @@ async def process_github_completions(body: RequestBody):
     response = await httpx.AsyncClient().post(url, headers=headers, json=body.model_dump(), timeout=360)
     yield response.content
 
+@app.get("/v1/models")
+async def get_models():
+    all_models = list(MODEL_NAMES.keys()) + list(MANTON_MODEL_NAMES.keys()) + list(GITHUB_MODEL_NAMES.keys())
+    return {"models": all_models}
 
 
 @app.get("/")
