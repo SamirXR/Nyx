@@ -235,11 +235,9 @@ async def website(ctx):
 
 @bot.event
 async def on_member_join(member):
-    channel = bot.get_channel(913760148302987304)  # replace with your channel ID
-    if channel:
-        embed = Embed(title="Welcome to NyX AI!", description=f"Welcome {member.mention}!")
-        embed.set_image(url="https://cdn.discordapp.com/attachments/1173668919769309225/1202613024729600010/1.png")  # replace with your image URL
-        await channel.send(embed=embed)
+channel = bot.get_channel(913760148302987304)  # replace with your channel ID
+if channel:
+await channel.send(f'Welcome to NyX AI, {member.mention}!')
 
 @bot.event
 async def on_member_leave(member):
