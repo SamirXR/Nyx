@@ -235,9 +235,9 @@ async def website(ctx):
 
 @bot.event
 async def on_member_join(member):
-channel = bot.get_channel(913760148302987304)  # replace with your channel ID
-if channel:
-await channel.send(f'Welcome to NyX AI, {member.mention}!')
+    channel = bot.get_channel(913760148302987304)  # replace with your channel ID
+    if channel:
+        await channel.send(f'Welcome to NyX AI, {member.mention}!')
 
 @bot.event
 async def on_member_leave(member):
