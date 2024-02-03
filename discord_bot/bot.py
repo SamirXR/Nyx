@@ -232,20 +232,11 @@ async def website(ctx):
     embed.set_footer(text=f"Requested By {ctx.author.name}")  # Adjust size as needed
     await ctx.respond(embed=embed)
 
-
-@bot.event
-async def on_member_join(member):
-    channel = bot.get_channel(913760148302987304)  # replace with your channel ID
-    if channel:
-        await channel.send(f'Welcome to NyX AI, {member.mention}!')
-
 @bot.event
 async def on_member_leave(member):
     channel = bot.get_channel(913760148302987304)  # replace with your channel ID
     if channel:
         await channel.send(f'{member.name} left the server : |')
-
-
 
 
 @bot.slash_command(name="usage-information", description="Shows the Information about Daily usage")
