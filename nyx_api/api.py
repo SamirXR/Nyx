@@ -108,7 +108,7 @@ def verify_nyx_api_key(thothaiapikey):
 
     if found_item:
         reset_time = datetime.fromisoformat(found_item["reset_time"])
-        if found_item["requests"] >= 600 and datetime.now() - reset_time < timedelta(days=1):
+        if found_item["requests"] >= 1000 and datetime.now() - reset_time < timedelta(days=1):
             return False
         else:
             if datetime.now() - reset_time >= timedelta(days=1):
