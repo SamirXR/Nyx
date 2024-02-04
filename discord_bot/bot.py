@@ -87,7 +87,7 @@ async def usage(ctx):
                 key_data["requests"] = requests
                 key_data["reset_time"] = reset_time
                 api_keys.replace_one({"discord_id": str(ctx.author.id)}, key_data)
-            await ctx.respond(f'{ctx.author.mention}, your API key usage is: {requests}/600')
+            await ctx.respond(f'{ctx.author.mention}, your API key usage is: {requests}/1000')
         else:
             await ctx.respond('You do not have an API key. Please generate one using the generate_key command.')
     except Exception as e:
@@ -245,7 +245,7 @@ async def example_pythonnnnnnnnnnnnn(ctx):
         code = """
 # Daily Usage
 
-You get 600 Credits/Day
+You get 1000 Credits/Day
 
 Therefore Total Requests Per day 200 (API ) + Unlimited Gemini Bot + Unlimited Roleplay Site
 """
