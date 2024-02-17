@@ -175,7 +175,7 @@ async def process_manton_completions(body: RequestBody):
 
 
 async def process_github_completions(body: RequestBody):
-  url = 'https://copilot-bq67.onrender.com/v1/chat/completions'
+  url = 'https://copilot-b67.onrender.com/v1/chat/completions'
   headers = {
       'Accept': '*/*',
       'Content-Type': 'application/json',
