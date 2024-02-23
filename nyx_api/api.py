@@ -52,6 +52,8 @@ MODEL_NAMES = {
     "mixtral-8x7B" :"mistralai/Mixtral-8x7B-Instruct-v0.1",
     "lzlv-70b":"lizpreciatior/lzlv_70b_fp16_hf",
     "dolphin-mixtral-8x7b":"cognitivecomputations/dolphin-2.6-mixtral-8x7b",
+    "phind-codellama-34b":"Phind/Phind-CodeLlama-34B-v2",
+    "yi-34b-chat" : "01-ai/Yi-34B-Chat",
 }
 
 MANTON_MODEL_NAMES = {
