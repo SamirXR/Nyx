@@ -52,6 +52,14 @@ MODEL_NAMES = {
     "mixtral-8x7B" :"mistralai/Mixtral-8x7B-Instruct-v0.1",
     "lzlv-70b":"lizpreciatior/lzlv_70b_fp16_hf",
     "dolphin-mixtral-8x7b":"cognitivecomputations/dolphin-2.6-mixtral-8x7b",
+    "meta-llama/Meta-Llama-3-70B-Instruct" : "meta-llama/Meta-Llama-3-70B-Instruct",
+    "meta-llama/Meta-Llama-3-8B-Instruct" : "meta-llama/Meta-Llama-3-8B-Instruct",
+    "mistralai/Mixtral-8x22B-Instruct-v0.1" :"mistralai/Mixtral-8x22B-Instruct-v0.1",
+    "microsoft/WizardLM-2-8x22B" : "microsoft/WizardLM-2-8x22B",
+    "microsoft/WizardLM-2-7" : "microsoft/WizardLM-2-7",
+    "databricks/dbrx-instruct" : "databricks/dbrx-instruct",
+    "HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1" : "HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1",
+    "google/gemma-1.1-7b-it" : "google/gemma-1.1-7b-it",
 }
 
 MANTON_MODEL_NAMES = {
