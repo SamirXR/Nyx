@@ -1,6 +1,4 @@
-py-cord
-fastapi 
-httpx 
-pydantic 
-pymongo
+fastapi
+httpx
+pydantic
 uvicorn
